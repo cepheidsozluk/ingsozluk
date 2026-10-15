@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cepheid Scans - SFX Sözlüğü</title>
+    <title>Cepheid Scans - İngilizce - Türkçe Sözlük</title>
     <link rel="icon" type="image/png" href="https://i.ibb.co/MDDG50d0/cepheidyenix100.png">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
     <style>
         :root {
-            --bg-color: #1a1a24;
-            --panel-bg: #2b2b36;
+            --bg-color: #1a1e1a;
+            --panel-bg: #232924;
             --text-color: #f5f5f5;
-            --accent-color: #4da6ff;
-            --border-color: #3f3f4e;
+            --accent-color: #4caf50;
+            --border-color: #354236;
             --fav-color: #ffd700;
         }
         
@@ -84,19 +84,15 @@
         .letter-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; }
         
         .letter-btn { background: none; border: 1px solid var(--border-color); color: var(--text-color); padding: 8px 2px; border-radius: 4px; cursor: pointer; text-align: center; transition: 0.2s; font-size: 14px; font-weight: bold; position: relative; }
-        .spacer { visibility: hidden; }
-
-        .letter-btn::after { content: attr(data-romaji); position: absolute; bottom: 110%; left: 50%; transform: translateX(-50%); background-color: var(--accent-color); color: #fff; padding: 3px 6px; border-radius: 4px; font-size: 11px; white-space: nowrap; opacity: 0; visibility: hidden; transition: opacity 0.2s; pointer-events: none; box-shadow: 0 2px 4px rgba(0,0,0,0.3); z-index: 10; }
-        .letter-btn:hover::after { opacity: 1; visibility: visible; }
+        
         .letter-btn:hover, .letter-btn.active { background-color: var(--accent-color); color: #fff; border-color: var(--accent-color); }
         .full-list-btn { grid-column: span 5; margin-bottom: 6px; }
-        .full-list-btn::after { display: none; }
 
-        #favBtn { background-color: #3f3f4e; color: #ddd; display: flex; justify-content: center; align-items: center; gap: 8px; font-size: 14px; }
+        #favBtn { background-color: #2e382f; color: #ddd; display: flex; justify-content: center; align-items: center; gap: 8px; font-size: 14px; }
         #favBtn:hover, #favBtn.active { background-color: rgba(255, 215, 0, 0.15); color: var(--fav-color); border-color: var(--fav-color); }
 
         .content { flex-grow: 1; background-color: var(--panel-bg); padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.3); overflow-x: auto; }
-        .search-box { width: 100%; padding: 12px; font-size: 16px; margin-bottom: 20px; border: 1px solid var(--border-color); border-radius: 4px; background-color: #3f3f4e; color: white; box-sizing: border-box;}
+        .search-box { width: 100%; padding: 12px; font-size: 16px; margin-bottom: 20px; border: 1px solid var(--border-color); border-radius: 4px; background-color: #2e382f; color: white; box-sizing: border-box;}
         
         table { width: 100%; border-collapse: collapse; }
         th, td { padding: 15px; text-align: left; border-bottom: 1px solid var(--border-color); vertical-align: top; }
@@ -105,7 +101,7 @@
         th:nth-child(1), td:nth-child(1) { min-width: 180px; width: 220px; }
         th:nth-child(2), td:nth-child(2) { width: 100px; color: #aaa; }
 
-        tr:hover { background-color: #353544; }
+        tr:hover { background-color: #2d382e; }
         .loading { text-align: center; padding: 50px; font-size: 18px; color: var(--accent-color); }
 
         .more-link { color: var(--accent-color); font-size: 0.85em; cursor: pointer; text-decoration: underline; margin-top: 5px; display: inline-block; }
@@ -115,13 +111,13 @@
         .fav-star {
             cursor: pointer;
             font-size: 1.3em;
-            color: #555;
+            color: #666;
             margin-right: 8px;
             user-select: none;
             transition: transform 0.2s, color 0.2s;
             display: inline-block;
         }
-        .fav-star:hover { transform: scale(1.25); color: #888; }
+        .fav-star:hover { transform: scale(1.25); color: #999; }
         .fav-star.active { color: var(--fav-color); }
 
         .modal { display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7); backdrop-filter: blur(3px); justify-content: center; align-items: center; }
@@ -189,7 +185,7 @@
             bottom: 30px;
             left: 50%;
             transform: translateX(-50%);
-            background-color: #2b2b36;
+            background-color: #232924;
             color: #fff;
             padding: 12px 24px;
             border-radius: 8px;
@@ -246,7 +242,7 @@
             margin: 0;
             color: var(--accent-color);
             text-align: center;
-            background-color: #22222e;
+            background-color: #1a1e1a;
             padding: 10px 15px;
             font-size: 0.85em;
             letter-spacing: 0.08em;
@@ -258,17 +254,17 @@
             align-items: baseline;
             gap: 8px;
             padding: 8px 14px;
-            border-bottom: 1px solid rgba(63,63,78,0.5);
+            border-bottom: 1px solid rgba(53,66,54,0.5);
             font-size: 0.8em;
             line-height: 1.4;
             transition: background 0.15s;
         }
         .update-item:last-child { border-bottom: none; }
-        .update-item:hover { background-color: #32323f; }
+        .update-item:hover { background-color: #2a332b; }
         .update-date { color: var(--accent-color); font-weight: bold; white-space: nowrap; flex-shrink: 0; font-size: 0.95em; }
         .update-sep { color: #555; flex-shrink: 0; }
         .update-desc { color: #ccc; }
-        .update-desc .add { color: #5dca82; font-weight: bold; }
+        .update-desc .add { color: #4caf50; font-weight: bold; }
 
         .word-counter { text-align: right; font-size: 0.85em; color: #888; margin-bottom: 8px; }
         .word-counter span { color: var(--accent-color); font-weight: bold; }
@@ -290,7 +286,7 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.4);
             transition: opacity 0.3s, transform 0.3s;
         }
-        #scrollTopBtn:hover { transform: translateY(-3px); box-shadow: 0 6px 16px rgba(77,166,255,0.4); }
+        #scrollTopBtn:hover { transform: translateY(-3px); box-shadow: 0 6px 16px rgba(76,175,80,0.4); }
 
         @media (max-width: 768px) { 
             .main-container { flex-direction: column; } 
@@ -309,7 +305,7 @@
                 padding: 12px;
                 box-sizing: border-box;
             }
-            tr:hover { background-color: #353544; }
+            tr:hover { background-color: #2d382e; }
             td { padding: 4px 8px; border-bottom: none; font-size: 0.95em; }
             
             td:nth-child(1) {
@@ -322,7 +318,7 @@
                 margin-bottom: 4px;
             }
             td:nth-child(2) { color: var(--accent-color); font-size: 0.9em; width: 100%; }
-            td:nth-child(2)::before { content: "Romaji: "; color: #666; font-size: 0.85em; }
+            td:nth-child(2)::before { content: "Okunuş: "; color: #666; font-size: 0.85em; }
             td:nth-child(3)::before { content: "Türkçe: "; color: #666; font-size: 0.85em; display: block; margin-bottom: 2px;}
             td:nth-child(4)::before { content: "Açıklama: "; color: #666; font-size: 0.85em; }
             td:nth-child(4) { color: #bbb; font-size: 0.85em; margin-top: 8px;}
@@ -348,13 +344,13 @@
 
 <div class="page-wrapper">
     <div class="header-container">
-        <h1>Cepheid Scans - SFX Sözlüğü</h1>
+        <h1>Cepheid Scans - İngilizce - Türkçe Sözlük</h1>
     </div>
 
     <div class="main-container">
         <div style="display:flex; flex-direction:column;">
             <div class="sidebar">
-                <h3>Kanalara Göre</h3>
+                <h3>Harflere Göre</h3>
                 <div class="letter-grid">
                     <button id="favBtn" class="letter-btn full-list-btn" onclick="filterByFavorites()">
                         <span style="color: var(--fav-color); font-size: 1.2em; line-height: 1;">★</span> Favorilerim
@@ -373,13 +369,13 @@
         </div>
 
         <div class="content">
-            <input type="text" id="searchInput" class="search-box" placeholder="Japonca, Romaji veya Türkçe ara (Hiragana/Katakana destekli)...">
+            <input type="text" id="searchInput" class="search-box" placeholder="İngilizce, Okunuş veya Türkçe ara...">
             <div class="word-counter" id="wordCounter">Yükleniyor...</div>
             <table>
                 <thead>
                     <tr>
-                        <th>Japonca</th>
-                        <th>Romaji</th>
+                        <th>İngilizce</th>
+                        <th>Okunuş</th>
                         <th>Türkçe Anlamı</th>
                         <th>Açıklama</th>
                     </tr>
@@ -416,19 +412,7 @@
 <script>
     const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTvI9TzWNvNo1xMHE1t8lmeY8Ma6gsVxA0pftYke_tw7nOykjkQLypp1AjOl2iaN000i2dpvquzgRhX/pub?gid=0&single=true&output=csv";
     
-    const katakanaList = [
-        { k:"ア", r:"a" }, { k:"イ", r:"i" }, { k:"ウ", r:"u" }, { k:"エ", r:"e" }, { k:"オ", r:"o" },
-        { k:"カ", r:"ka" }, { k:"キ", r:"ki" }, { k:"ク", r:"ku" }, { k:"ケ", r:"ke" }, { k:"コ", r:"ko" },
-        { k:"サ", r:"sa" }, { k:"シ", r:"shi" }, { k:"ス", r:"su" }, { k:"セ", r:"se" }, { k:"ソ", r:"so" },
-        { k:"タ", r:"ta" }, { k:"チ", r:"chi" }, { k:"ツ", r:"tsu" }, { k:"テ", r:"te" }, { k:"ト", r:"to" },
-        { k:"ナ", r:"na" }, { k:"ニ", r:"ni" }, { k:"ヌ", r:"nu" }, { k:"ネ", r:"ne" }, { k:"ノ", r:"no" },
-        { k:"ハ", r:"ha" }, { k:"ヒ", r:"hi" }, { k:"フ", r:"fu" }, { k:"ヘ", r:"he" }, { k:"ホ", r:"ho" },
-        { k:"マ", r:"ma" }, { k:"ミ", r:"mi" }, { k:"ム", r:"mu" }, { k:"メ", r:"me" }, { k:"モ", r:"mo" },
-        { k:"ヤ", r:"ya" }, { k:"", r:"" },    { k:"ユ", r:"yu" }, { k:"", r:"" },    { k:"ヨ", r:"yo" },
-        { k:"ラ", r:"ra" }, { k:"リ", r:"ri" }, { k:"ル", r:"ru" }, { k:"レ", r:"re" }, { k:"ロ", r:"ro" },
-        { k:"ワ", r:"wa" }, { k:"", r:"" },    { k:"", r:"" },    { k:"", r:"" },    { k:"ヲ", r:"wo" },
-        { k:"ン", r:"n" }
-    ];
+    const alphabetList = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
     
     let allData = [];
     let currentDisplayData = [];
@@ -436,20 +420,16 @@
     let currentPage = 1;
     const itemsPerPage = 50; 
 
-    let favorites = JSON.parse(localStorage.getItem('cepheid_favorites')) || [];
+    let favorites = JSON.parse(localStorage.getItem('cepheid_eng_favorites')) || [];
 
-    const CACHE_KEY = 'cepheid_sfx_data';
-    const CACHE_TIME = 'cepheid_sfx_time';
+    const CACHE_KEY = 'cepheid_eng_sfx_data';
+    const CACHE_TIME = 'cepheid_eng_sfx_time';
     const CACHE_DURATION = 60 * 60 * 1000; 
     let currentSearchTerm = ''; 
 
     function getCleanFirstChar(str) {
-        let char = str.trim().charAt(0);
-        return char.normalize('NFD').charAt(0);
-    }
-
-    function hiraganaToKatakana(str) {
-        return str.replace(/[\u3041-\u3096]/g, match => String.fromCharCode(match.charCodeAt(0) + 0x60));
+        if(!str) return "";
+        return str.trim().charAt(0).toUpperCase();
     }
 
     function copyText(element) {
@@ -493,15 +473,15 @@
 
                     allData = rows.map((row, index) => ({
                         id: index,
-                        japanese: row[0] ? row[0].trim() : '',
-                        romaji: row[1] ? row[1].trim() : '',
+                        english: row[0] ? row[0].trim() : '',
+                        pronunciation: row[1] ? row[1].trim() : '',
                         turkish: row[2] ? row[2].trim() : '',
                         explanation: row[3] ? row[3].trim() : '',
                         example: row[4] ? row[4].trim() : '',
                         updateDate: row[5] ? row[5].trim() : ''
-                    })).filter(item => item.romaji !== '' || item.japanese !== '');
+                    })).filter(item => item.english !== '' || item.turkish !== '');
 
-                    allData.sort((a, b) => a.romaji.localeCompare(b.romaji, 'en'));
+                    allData.sort((a, b) => a.english.localeCompare(b.english, 'en'));
 
                     localStorage.setItem(CACHE_KEY, JSON.stringify(allData));
                     localStorage.setItem(CACHE_TIME, now.toString());
@@ -558,19 +538,12 @@
 
     function initSidebar() {
         const container = document.getElementById('letterContainer');
-        katakanaList.forEach(item => {
-            if (item.k === "") {
-                let spacer = document.createElement('div');
-                spacer.className = 'spacer';
-                container.appendChild(spacer);
-            } else {
-                let btn = document.createElement('button');
-                btn.className = 'letter-btn';
-                btn.innerText = item.k;              
-                btn.setAttribute('data-romaji', item.r); 
-                btn.onclick = () => filterByLetter(item.k, btn);
-                container.appendChild(btn);
-            }
+        alphabetList.forEach(letter => {
+            let btn = document.createElement('button');
+            btn.className = 'letter-btn';
+            btn.innerText = letter;              
+            btn.onclick = () => filterByLetter(letter, btn);
+            container.appendChild(btn);
         });
     }
 
@@ -601,7 +574,7 @@
             starElement.classList.add('active');
             starElement.innerText = '★';
         }
-        localStorage.setItem('cepheid_favorites', JSON.stringify(favorites));
+        localStorage.setItem('cepheid_eng_favorites', JSON.stringify(favorites));
 
         if (currentCategory === 'Favoriler') {
             filterByFavorites();
@@ -637,7 +610,7 @@
                             Aradığınız <strong style="color: var(--accent-color);">"${currentSearch}"</strong> kelimesi sözlükte bulunamadı.
                         </div>
                         <div style="display: flex; flex-direction: column; align-items: center; gap: 15px;">
-                            <span style="color: #888; font-size: 0.95em;">Çeviri ekibimize yeni bir SFX önermek ister misin?</span>
+                            <span style="color: #888; font-size: 0.95em;">Çeviri ekibimize yeni bir kelime önermek ister misin?</span>
                             <a href="https://discord.gg/uVqCHzkxYq" target="_blank" class="page-btn active" style="text-decoration: none; display: inline-flex; align-items: center; gap: 10px; font-size: 1.1em; padding: 12px 25px;">
                                 <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9 11H7V9h2v2zm4 0h-2V9h2v2zm4 0h-2V9h2v2z"/></svg>
                                 Discord'da Kelime Öner
@@ -662,17 +635,17 @@
         const svgIcon = `<svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>`;
 
         pageData.forEach(item => {
-            let formattedJapanese = item.japanese.replace(/,\s*/g, ',<br>').replace(/\n/g, '<br>');
+            let formattedEnglish = item.english.replace(/,\s*/g, ',<br>').replace(/\n/g, '<br>');
             let formattedTurkish = item.turkish.replace(/(\(\d+\))/g, '<br><span style="color:var(--accent-color); font-weight:bold;">$1</span>').replace(/^<br>/, '');
             let formattedExp = item.explanation.replace(/(\(\d+\))/g, '<br><span style="color:var(--accent-color);">$1</span>').replace(/^<br>/, '');
             let moreButton = item.example !== '' ? `<br><span class="more-link" onclick="openModal(${item.id})">Daha Fazla Örnek »</span>` : '';
 
-            let hJapanese = highlightText(formattedJapanese, currentSearchTerm);
-            let hRomaji = highlightText(item.romaji, currentSearchTerm);
+            let hEnglish = highlightText(formattedEnglish, currentSearchTerm);
+            let hPronunciation = highlightText(item.pronunciation, currentSearchTerm);
             let hTurkish = highlightText(formattedTurkish, currentSearchTerm);
             let hExp = highlightText(formattedExp, currentSearchTerm);
 
-            let copyJp = `<button class="copy-btn" data-copy="${encodeURIComponent(item.japanese)}" onclick="copyText(this)" title="Japoncayı Kopyala">${svgIcon}</button>`;
+            let copyEn = `<button class="copy-btn" data-copy="${encodeURIComponent(item.english)}" onclick="copyText(this)" title="İngilizceyi Kopyala">${svgIcon}</button>`;
             let copyTr = `<button class="copy-btn" data-copy="${encodeURIComponent(item.turkish)}" onclick="copyText(this)" title="Türkçesini Kopyala">${svgIcon}</button>`;
 
             let isFav = favorites.includes(item.id);
@@ -685,11 +658,11 @@
                     <td style="font-size: 1.25em; font-weight: bold; line-height: 1.4; color: #fff;">
                         <div class="copy-wrapper">
                             ${favHtml}
-                            <span>${hJapanese}</span>
-                            ${copyJp}
+                            <span>${hEnglish}</span>
+                            ${copyEn}
                         </div>
                     </td>
-                    <td style="font-size: 1.05em;">${hRomaji}</td>
+                    <td style="font-size: 1.05em;">${hPronunciation}</td>
                     <td>
                         <div class="copy-wrapper">
                             <span>${hTurkish}</span> 
@@ -759,7 +732,7 @@
         if (letter === 'Hepsi') {
             updateDisplayData(allData);
         } else {
-            let filtered = allData.filter(item => getCleanFirstChar(item.japanese) === letter);
+            let filtered = allData.filter(item => getCleanFirstChar(item.english) === letter);
             updateDisplayData(filtered);
         }
     }
@@ -782,15 +755,12 @@
             if (currentCategory === 'Favoriler') {
                 searchPool = allData.filter(item => favorites.includes(item.id));
             } else if (currentCategory !== 'Hepsi') {
-                searchPool = allData.filter(item => getCleanFirstChar(item.japanese) === currentCategory);
+                searchPool = allData.filter(item => getCleanFirstChar(item.english) === currentCategory);
             }
 
-            const termKana = hiraganaToKatakana(term);
-
             let filtered = searchPool.filter(item => 
-                item.japanese.toLowerCase().includes(term) ||
-                item.japanese.includes(termKana) ||
-                item.romaji.toLowerCase().includes(term) ||
+                item.english.toLowerCase().includes(term) ||
+                item.pronunciation.toLowerCase().includes(term) ||
                 item.turkish.toLowerCase().includes(term) ||
                 item.explanation.toLowerCase().includes(term)
             );
@@ -802,7 +772,7 @@
 
     function openModal(id) {
         const item = allData.find(x => x.id === id);
-        document.getElementById('modalTitle').innerText = `${item.japanese} (${item.romaji})`;
+        document.getElementById('modalTitle').innerText = `${item.english} (${item.pronunciation})`;
         
         let formattedExample = item.example;
         formattedExample = formattedExample.replace(/(\(\d+\))/g, '<br><br><span style="color:var(--accent-color); font-weight:bold; text-align:left; display:block;">$1</span>').replace(/^<br><br>/, '');
