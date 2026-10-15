@@ -8,12 +8,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
     <style>
         :root {
-            --bg-color: #1a1a24;
-            --panel-bg: #2b2b36;
+            --bg-color: #1a1e1a;
+            --panel-bg: #232924;
             --text-color: #f5f5f5;
-            --accent-color: #4da6ff;
-            --border-color: #3f3f4e;
-            --success-color: #5dca82;
+            --accent-color: #4caf50;
+            --border-color: #354236;
+            --success-color: #4caf50;
             --gold-color: #ffd700;
         }
 
@@ -131,7 +131,7 @@
             font-weight: normal;
         }
 
-        /* SIRALI KANA ÇUBUKLARI */
+        /* SIRALI HARF ÇUBUKLARI */
         .kana-bar-item {
             display: flex;
             align-items: center;
@@ -150,18 +150,14 @@
             color: var(--gold-color);
         }
         .kana-label {
-            width: 75px;
+            width: 40px;
             font-weight: bold;
             display: flex;
-            justify-content: space-between;
-        }
-        .kana-label span:last-child {
-            color: #888;
-            font-weight: normal;
+            justify-content: center;
         }
         .bar-wrapper {
             flex-grow: 1;
-            background-color: #1a1a24;
+            background-color: #1a1e1a;
             height: 14px;
             border-radius: 7px;
             overflow: hidden;
@@ -169,7 +165,7 @@
         }
         .bar-fill {
             height: 100%;
-            background: linear-gradient(90deg, #4da6ff, #5dca82);
+            background: linear-gradient(90deg, #388e3c, #4caf50);
             border-radius: 7px;
             width: 0%;
             transition: width 0.8s ease-in-out;
@@ -181,7 +177,7 @@
             font-weight: bold;
         }
 
-        /* TABLOLU DETAYLAR (ZENGİN SFX'LER) */
+        /* TABLOLU DETAYLAR */
         .mini-table {
             width: 100%;
             border-collapse: collapse;
@@ -195,10 +191,10 @@
         .mini-table th {
             color: var(--accent-color);
             font-weight: bold;
-            background: #22222e;
+            background: #1a1e1a;
         }
         .mini-table tr:hover {
-            background-color: #32323f;
+            background-color: #2a332b;
         }
 
         .loading { text-align: center; padding: 50px; font-size: 1.2em; color: var(--accent-color); }
@@ -219,7 +215,6 @@
             .navbar { flex-direction: column; gap: 15px; }
             .nav-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; }
             .nav-links a { margin: 0; }
-            .kana-label { width: 60px; }
         }
     </style>
 </head>
@@ -254,25 +249,15 @@
 </footer>
 
 <script>
-    const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTvI9TzWNvNo1xMHE1t8lmeY8Ma6gsVxA0pftYke_tw7nOykjkQLypp1AjOl2iaN000i2dpvquzgRhX/pub?gid=0&single=true&output=csv";
+    const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTIxPvzZurF9wYw5suGmNPwLm5_f4_qXHnsiTsuUIDw4J-QZDSWlTsGAPRH-JJUwE7B8J2LfmV3JZyK/pub?output=csv";
 
-    const katakanaMap = [
-        { k:"ア", r:"a" }, { k:"イ", r:"i" }, { k:"ウ", r:"u" }, { k:"エ", r:"e" }, { k:"オ", r:"o" },
-        { k:"カ", r:"ka" }, { k:"キ", r:"ki" }, { k:"ク", r:"ku" }, { k:"ケ", r:"ke" }, { k:"コ", r:"ko" },
-        { k:"サ", r:"sa" }, { k:"シ", r:"shi" }, { k:"ス", r:"su" }, { k:"セ", r:"se" }, { k:"ソ", r:"so" },
-        { k:"タ", r:"ta" }, { k:"チ", r:"chi" }, { k:"ツ", r:"tsu" }, { k:"テ", r:"te" }, { k:"ト", r:"to" },
-        { k:"ナ", r:"na" }, { k:"ニ", r:"ni" }, { k:"ヌ", r:"nu" }, { k:"ネ", r:"ne" }, { k:"ノ", r:"no" },
-        { k:"ハ", r:"ha" }, { k:"ヒ", r:"hi" }, { k:"フ", r:"fu" }, { k:"ヘ", r:"he" }, { k:"ホ", r:"ho" },
-        { k:"マ", r:"ma" }, { k:"ミ", r:"mi" }, { k:"ム", r:"mu" }, { k:"メ", r:"me" }, { k:"モ", r:"mo" },
-        { k:"ヤ", r:"ya" }, { k:"ユ", r:"yu" }, { k:"ヨ", r:"yo" },
-        { k:"ラ", r:"ra" }, { k:"リ", r:"ri" }, { k:"ル", r:"ru" }, { k:"レ", r:"re" }, { k:"ロ", r:"ro" },
-        { k:"ワ", r:"wa" }, { k:"ヲ", r:"wo" }, { k:"ン", r:"n" }
-    ];
+    const alphabetList = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","#"];
 
     function getCleanFirstChar(str) {
         if (!str) return '';
-        let char = str.trim().charAt(0);
-        return char.normalize('NFD').charAt(0);
+        let char = str.trim().charAt(0).toUpperCase();
+        if (!char.match(/[A-Z]/)) return "#";
+        return char;
     }
 
     Papa.parse(csvUrl, {
@@ -284,13 +269,12 @@
 
             const allData = rows.map((row, index) => ({
                 id: index,
-                japanese: row[0] ? row[0].trim() : '',
-                romaji: row[1] ? row[1].trim() : '',
-                turkish: row[2] ? row[2].trim() : '',
-                explanation: row[3] ? row[3].trim() : '',
-                example: row[4] ? row[4].trim() : '',
-                updateDate: row[5] ? row[5].trim() : ''
-            })).filter(item => item.romaji !== '' || item.japanese !== '');
+                english: row[0] ? row[0].trim() : '',      // A Sütunu
+                turkish: row[1] ? row[1].trim() : '',      // B Sütunu
+                explanation: row[2] ? row[2].trim() : '',  // C Sütunu
+                example: row[3] ? row[3].trim() : '',      // D Sütunu
+                updateDate: row[4] ? row[4].trim() : ''   // E Sütunu
+            })).filter(item => item.english !== '' || item.turkish !== '');
 
             renderDetailedStats(allData);
         }
@@ -299,28 +283,28 @@
     function renderDetailedStats(data) {
         const totalWords = data.length;
         const wordsWithExamples = data.filter(item => item.example !== '').length;
-        const exampleRate = ((wordsWithExamples / totalWords) * 100).toFixed(1);
+        const exampleRate = totalWords > 0 ? ((wordsWithExamples / totalWords) * 100).toFixed(1) : "0.0";
 
-        // 1. Kanalara Göre Sayım
-        const kanaMapLookup = {};
-        katakanaMap.forEach(item => {
-            kanaMapLookup[item.k] = { ...item, count: 0 };
+        // 1. Harflere Göre Sayım
+        const letterMapLookup = {};
+        alphabetList.forEach(letter => {
+            letterMapLookup[letter] = { letter: letter, count: 0 };
         });
 
         data.forEach(item => {
-            const firstChar = getCleanFirstChar(item.japanese);
-            if (kanaMapLookup[firstChar]) {
-                kanaMapLookup[firstChar].count++;
+            const firstChar = getCleanFirstChar(item.english);
+            if (letterMapLookup[firstChar]) {
+                letterMapLookup[firstChar].count++;
             }
         });
 
         // EN ÇOKTAN EN AZA DOĞRU SIRALAMA
-        const sortedKanas = Object.values(kanaMapLookup).sort((a, b) => b.count - a.count);
-        const maxCount = sortedKanas[0].count || 1;
-        const activeKanasCount = sortedKanas.filter(k => k.count > 0).length;
+        const sortedLetters = Object.values(letterMapLookup).sort((a, b) => b.count - a.count);
+        const maxCount = sortedLetters[0]?.count || 1;
+        const activeLettersCount = sortedLetters.filter(k => k.count > 0).length;
 
-        // 2. En Çok Anlama Sahip Çok Yönlü SFX'ler (Metinde geçen (1), (2), (3) vb. sayımı)
-        const versatileSFX = data.map(item => {
+        // 2. En Çok Anlama Sahip Çok Yönlü Kelimeler
+        const versatileWords = data.map(item => {
             const matches = item.turkish.match(/\(\d+\)/g);
             const count = matches ? matches.length : 1;
             return { ...item, meaningCount: count };
@@ -345,7 +329,7 @@
             <!-- GENEL METRİKLER -->
             <div class="cards-grid">
                 <div class="stat-card">
-                    <div class="label">Toplam SFX</div>
+                    <div class="label">Toplam Kelime</div>
                     <div class="value">${totalWords}</div>
                     <div class="sub">Kayıtlı veri sayısı</div>
                 </div>
@@ -355,44 +339,42 @@
                     <div class="sub">%${exampleRate} görsel kapsama</div>
                 </div>
                 <div class="stat-card">
-                    <div class="label">Lider Kategori</div>
-                    <div class="value" style="color: var(--gold-color);">${sortedKanas[0].k} <span style="font-size: 0.55em; color: #aaa;">(${sortedKanas[0].r})</span></div>
-                    <div class="sub">${sortedKanas[0].count} kelime barındırıyor</div>
+                    <div class="label">Lider Harf</div>
+                    <div class="value" style="color: var(--gold-color);">${sortedLetters[0]?.letter || '-'}</div>
+                    <div class="sub">${sortedLetters[0]?.count || 0} kelime barındırıyor</div>
                 </div>
                 <div class="stat-card">
-                    <div class="label">Dolu Kategori Oranı</div>
-                    <div class="value">${activeKanasCount} / ${katakanaMap.length}</div>
-                    <div class="sub">%${((activeKanasCount / katakanaMap.length) * 100).toFixed(0)} kana aktif</div>
+                    <div class="label">Dolu Harf Oranı</div>
+                    <div class="value">${activeLettersCount} / ${alphabetList.length}</div>
+                    <div class="sub">%${((activeLettersCount / alphabetList.length) * 100).toFixed(0)} harf aktif</div>
                 </div>
             </div>
 
-            <!-- SIRALI KANALAR (EN ÇOKTAN EN AZA) -->
+            <!-- SIRALI HARFLER (EN ÇOKTAN EN AZA) -->
             <div class="details-panel">
                 <h2>
-                    Kanalara Göre Dağılım Sıralaması
+                    Harflere Göre Dağılım Sıralaması
                     <span>En çok kelimeden en aza doğru</span>
                 </h2>
                 <div id="sortedBarsList"></div>
             </div>
 
-            <!-- ÇOK YÖNLÜ SFX'LER VE GÜNCELLEME TRENLERİ -->
+            <!-- ÇOK YÖNLÜ KELİMELER VE GÜNCELLEME TRENLERİ -->
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px;">
                 <div class="details-panel">
-                    <h2>En Zengin (Çok Anlamlı) SFX'ler</h2>
+                    <h2>En Zengin (Çok Anlamlı) Kelimeler</h2>
                     <table class="mini-table">
                         <thead>
                             <tr>
-                                <th>Japonca</th>
-                                <th>Romaji</th>
+                                <th>İngilizce</th>
                                 <th>Anlam Çeşitliliği</th>
                             </tr>
                         </thead>
                         <tbody>
-                            ${versatileSFX.map(sfx => `
+                            ${versatileWords.map(word => `
                                 <tr>
-                                    <td style="font-weight:bold; color:#fff;">${sfx.japanese}</td>
-                                    <td style="color:#aaa;">${sfx.romaji}</td>
-                                    <td><span style="color:var(--accent-color); font-weight:bold;">${sfx.meaningCount}</span> farklı anlam</td>
+                                    <td style="font-weight:bold; color:#fff;">${word.english}</td>
+                                    <td><span style="color:var(--accent-color); font-weight:bold;">${word.meaningCount}</span> farklı anlam</td>
                                 </tr>
                             `).join('')}
                         </tbody>
@@ -405,7 +387,7 @@
                         <thead>
                             <tr>
                                 <th>Dönem (Ay.Yıl)</th>
-                                <th>Eklenen SFX</th>
+                                <th>Eklenen Kelime</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -424,11 +406,11 @@
             </div>
         `;
 
-        // Çubukları Doldur (Animasyonlu)
+        // Çubukları Doldur
         const barsContainer = document.getElementById('sortedBarsList');
-        sortedKanas.forEach((item, index) => {
+        sortedLetters.forEach((item, index) => {
             const count = item.count;
-            const percentage = ((count / maxCount) * 100).toFixed(1);
+            const percentage = maxCount > 0 ? ((count / maxCount) * 100).toFixed(1) : 0;
             const globalPercent = totalWords > 0 ? ((count / totalWords) * 100).toFixed(1) : 0;
             const rankClass = index < 3 ? 'kana-rank top3' : 'kana-rank';
 
@@ -437,8 +419,7 @@
             row.innerHTML = `
                 <div class="${rankClass}">#${index + 1}</div>
                 <div class="kana-label">
-                    <span>${item.k}</span>
-                    <span>${item.r}</span>
+                    <span>${item.letter}</span>
                 </div>
                 <div class="bar-wrapper">
                     <div class="bar-fill" style="width: ${percentage}%;"></div>

@@ -81,12 +81,11 @@
         
         .sidebar { background-color: var(--panel-bg); padding: 15px; border-radius: 8px; min-width: 240px; box-shadow: 0 4px 8px rgba(0,0,0,0.3); height: fit-content; max-height: 85vh; overflow-y: auto; }
         .sidebar h3 { margin-top: 0; color: var(--accent-color); text-align: center; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; }
-        .letter-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; }
         
-        .letter-btn { background: none; border: 1px solid var(--border-color); color: var(--text-color); padding: 8px 2px; border-radius: 4px; cursor: pointer; text-align: center; transition: 0.2s; font-size: 14px; font-weight: bold; position: relative; }
-        
+        .letter-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+        .letter-btn { background: none; border: 1px solid var(--border-color); color: var(--text-color); padding: 8px 0; border-radius: 4px; cursor: pointer; text-align: center; transition: 0.2s; font-size: 14px; font-weight: bold; }
         .letter-btn:hover, .letter-btn.active { background-color: var(--accent-color); color: #fff; border-color: var(--accent-color); }
-        .full-list-btn { grid-column: span 5; margin-bottom: 6px; }
+        .full-list-btn { grid-column: span 4; margin-bottom: 6px; }
 
         #favBtn { background-color: #2e382f; color: #ddd; display: flex; justify-content: center; align-items: center; gap: 8px; font-size: 14px; }
         #favBtn:hover, #favBtn.active { background-color: rgba(255, 215, 0, 0.15); color: var(--fav-color); border-color: var(--fav-color); }
@@ -98,8 +97,7 @@
         th, td { padding: 15px; text-align: left; border-bottom: 1px solid var(--border-color); vertical-align: top; }
         th { background-color: var(--bg-color); color: var(--accent-color); position: sticky; top: 0; z-index: 5; font-weight: bold; text-transform: uppercase; font-size: 0.9em; }
         
-        th:nth-child(1), td:nth-child(1) { min-width: 180px; width: 220px; }
-        th:nth-child(2), td:nth-child(2) { width: 100px; color: #aaa; }
+        th:nth-child(1), td:nth-child(1) { min-width: 180px; width: 250px; }
 
         tr:hover { background-color: #2d382e; }
         .loading { text-align: center; padding: 50px; font-size: 18px; color: var(--accent-color); }
@@ -108,15 +106,7 @@
         .more-link:hover { color: #fff; }
 
         /* FAVORİ YILDIZI */
-        .fav-star {
-            cursor: pointer;
-            font-size: 1.3em;
-            color: #666;
-            margin-right: 8px;
-            user-select: none;
-            transition: transform 0.2s, color 0.2s;
-            display: inline-block;
-        }
+        .fav-star { cursor: pointer; font-size: 1.3em; color: #666; margin-right: 8px; user-select: none; transition: transform 0.2s, color 0.2s; display: inline-block; }
         .fav-star:hover { transform: scale(1.25); color: #999; }
         .fav-star.active { color: var(--fav-color); }
 
@@ -132,133 +122,28 @@
         .page-btn:hover:not(:disabled), .page-btn.active { background-color: var(--accent-color); color: #fff; border-color: var(--accent-color); }
         .page-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
-        /* ARAMA VURGUSU (HIGHLIGHT) VE YENİ KOPYALAMA İKONLARI */
-        .highlight {
-            background-color: rgba(255, 215, 0, 0.25);
-            color: #ffd700;
-            border-radius: 3px;
-            padding: 0 2px;
-            font-weight: bold;
-        }
-
-        .copy-wrapper {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .copy-btn {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            color: #888;
-            cursor: pointer;
-            padding: 4px;
-            border-radius: 4px;
-            opacity: 0;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: 2px;
-        }
-        
-        tr:hover .copy-btn {
-            opacity: 1;
-        }
-        
-        .copy-btn:hover { 
-            color: #fff; 
-            background: var(--accent-color);
-            border-color: var(--accent-color);
-            transform: translateY(-2px);
-        }
-        
-        .copy-btn svg {
-            width: 14px;
-            height: 14px;
-            fill: currentColor;
-        }
+        /* ARAMA VURGUSU VE KOPYALAMA İKONLARI */
+        .highlight { background-color: rgba(255, 215, 0, 0.25); color: #ffd700; border-radius: 3px; padding: 0 2px; font-weight: bold; }
+        .copy-wrapper { display: inline-flex; align-items: center; gap: 8px; }
+        .copy-btn { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255,255,255,0.1); color: #888; cursor: pointer; padding: 4px; border-radius: 4px; opacity: 0; transition: all 0.2s ease; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+        tr:hover .copy-btn { opacity: 1; }
+        .copy-btn:hover { color: #fff; background: var(--accent-color); border-color: var(--accent-color); transform: translateY(-2px); }
+        .copy-btn svg { width: 14px; height: 14px; fill: currentColor; }
 
         /* TOAST BİLDİRİMİ */
-        .toast {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #232924;
-            color: #fff;
-            padding: 12px 24px;
-            border-radius: 8px;
-            border: 1px solid var(--accent-color);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s, visibility 0.3s;
-            z-index: 1000;
-            font-weight: bold;
-            pointer-events: none;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .toast.show {
-            opacity: 1;
-            visibility: visible;
-        }
-        .toast svg {
-            width: 18px;
-            height: 18px;
-            fill: var(--accent-color);
-        }
+        .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background-color: #232924; color: #fff; padding: 12px 24px; border-radius: 8px; border: 1px solid var(--accent-color); box-shadow: 0 4px 15px rgba(0,0,0,0.6); opacity: 0; visibility: hidden; transition: opacity 0.3s, visibility 0.3s; z-index: 1000; font-weight: bold; pointer-events: none; display: flex; align-items: center; gap: 10px; }
+        .toast.show { opacity: 1; visibility: visible; }
+        .toast svg { width: 18px; height: 18px; fill: var(--accent-color); }
 
         /* ALT BİLGİ (FOOTER) */
-        footer {
-            background-color: var(--panel-bg);
-            text-align: center;
-            padding: 20px;
-            font-size: 14px;
-            color: #888;
-            border-top: 1px solid var(--border-color);
-            box-shadow: 0 -4px 10px rgba(0,0,0,0.3);
-        }
-        footer a {
-            color: var(--accent-color);
-            text-decoration: none;
-        }
-        footer a:hover {
-            text-decoration: underline;
-        }
+        footer { background-color: var(--panel-bg); text-align: center; padding: 20px; font-size: 14px; color: #888; border-top: 1px solid var(--border-color); box-shadow: 0 -4px 10px rgba(0,0,0,0.3); }
+        footer a { color: var(--accent-color); text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
 
         /* SON GÜNCELLEMELER PANELİ */
-        .updates-panel {
-            background-color: var(--panel-bg);
-            border-radius: 8px;
-            min-width: 240px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-            overflow: hidden;
-            margin-top: 12px;
-        }
-        .updates-panel h3 {
-            margin: 0;
-            color: var(--accent-color);
-            text-align: center;
-            background-color: #1a1e1a;
-            padding: 10px 15px;
-            font-size: 0.85em;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            border-bottom: 1px solid var(--border-color);
-        }
-        .update-item {
-            display: flex;
-            align-items: baseline;
-            gap: 8px;
-            padding: 8px 14px;
-            border-bottom: 1px solid rgba(53,66,54,0.5);
-            font-size: 0.8em;
-            line-height: 1.4;
-            transition: background 0.15s;
-        }
+        .updates-panel { background-color: var(--panel-bg); border-radius: 8px; min-width: 240px; box-shadow: 0 4px 8px rgba(0,0,0,0.3); overflow: hidden; margin-top: 12px; }
+        .updates-panel h3 { margin: 0; color: var(--accent-color); text-align: center; background-color: #1a1e1a; padding: 10px 15px; font-size: 0.85em; letter-spacing: 0.08em; text-transform: uppercase; border-bottom: 1px solid var(--border-color); }
+        .update-item { display: flex; align-items: baseline; gap: 8px; padding: 8px 14px; border-bottom: 1px solid rgba(53,66,54,0.5); font-size: 0.8em; line-height: 1.4; transition: background 0.15s; }
         .update-item:last-child { border-bottom: none; }
         .update-item:hover { background-color: #2a332b; }
         .update-date { color: var(--accent-color); font-weight: bold; white-space: nowrap; flex-shrink: 0; font-size: 0.95em; }
@@ -269,23 +154,7 @@
         .word-counter { text-align: right; font-size: 0.85em; color: #888; margin-bottom: 8px; }
         .word-counter span { color: var(--accent-color); font-weight: bold; }
 
-        #scrollTopBtn {
-            display: none;
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 99;
-            background-color: var(--accent-color);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 45px;
-            height: 45px;
-            font-size: 20px;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-            transition: opacity 0.3s, transform 0.3s;
-        }
+        #scrollTopBtn { display: none; position: fixed; bottom: 30px; right: 30px; z-index: 99; background-color: var(--accent-color); color: white; border: none; border-radius: 50%; width: 45px; height: 45px; font-size: 20px; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.4); transition: opacity 0.3s, transform 0.3s; }
         #scrollTopBtn:hover { transform: translateY(-3px); box-shadow: 0 6px 16px rgba(76,175,80,0.4); }
 
         @media (max-width: 768px) { 
@@ -297,32 +166,14 @@
 
             table thead { display: none; }
             table, tbody, tr, td { display: block; width: 100%; }
-            tr {
-                background: rgba(255,255,255,0.03);
-                border: 1px solid var(--border-color);
-                border-radius: 8px;
-                margin-bottom: 10px;
-                padding: 12px;
-                box-sizing: border-box;
-            }
+            tr { background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 10px; padding: 12px; box-sizing: border-box; }
             tr:hover { background-color: #2d382e; }
             td { padding: 4px 8px; border-bottom: none; font-size: 0.95em; }
+            td:nth-child(1) { font-size: 1.2em; font-weight: bold; color: #fff; width: 100%; padding-bottom: 6px; border-bottom: 1px solid var(--border-color) !important; margin-bottom: 4px; }
             
-            td:nth-child(1) {
-                font-size: 1.2em;
-                font-weight: bold;
-                color: #fff;
-                width: 100%;
-                padding-bottom: 6px;
-                border-bottom: 1px solid var(--border-color) !important;
-                margin-bottom: 4px;
-            }
-            td:nth-child(2) { color: var(--accent-color); font-size: 0.9em; width: 100%; }
-            td:nth-child(2)::before { content: "Okunuş: "; color: #666; font-size: 0.85em; }
-            td:nth-child(3)::before { content: "Türkçe: "; color: #666; font-size: 0.85em; display: block; margin-bottom: 2px;}
-            td:nth-child(4)::before { content: "Açıklama: "; color: #666; font-size: 0.85em; }
-            td:nth-child(4) { color: #bbb; font-size: 0.85em; margin-top: 8px;}
-            
+            td:nth-child(2)::before { content: "Türkçe: "; color: #666; font-size: 0.85em; display: block; margin-bottom: 2px;}
+            td:nth-child(3)::before { content: "Açıklama: "; color: #666; font-size: 0.85em; }
+            td:nth-child(3) { color: #bbb; font-size: 0.85em; margin-top: 8px;}
             .copy-btn { opacity: 0.4; }
         }
     </style>
@@ -335,10 +186,12 @@
     </div>
     <div class="nav-links">
         <a href="#">Ana Sayfa</a>
+        <a href="https://cepheidsozluk.github.io/sozluk/">JP Sözlük</a>
         <a href="istatistik.html">İstatistikler</a>
         <a href="https://discord.gg/uVqCHzkxYq">Discord</a>
         <a href="https://cepheidscans.blogspot.com">Sitemiz</a>
-        <a href="credits.html">Emeği Geçenler</a>
+        <a href="https://cepheidsozluk.github.io/sozluk/credits.html">Emeği Geçenler</a>
+        
     </div>
 </nav>
 
@@ -369,19 +222,18 @@
         </div>
 
         <div class="content">
-            <input type="text" id="searchInput" class="search-box" placeholder="İngilizce, Okunuş veya Türkçe ara...">
+            <input type="text" id="searchInput" class="search-box" placeholder="İngilizce veya Türkçe ara...">
             <div class="word-counter" id="wordCounter">Yükleniyor...</div>
             <table>
                 <thead>
                     <tr>
                         <th>İngilizce</th>
-                        <th>Okunuş</th>
                         <th>Türkçe Anlamı</th>
                         <th>Açıklama</th>
                     </tr>
                 </thead>
                 <tbody id="tableBody">
-                    <tr><td colspan="4" class="loading">Veritabanı yükleniyor...</td></tr>
+                    <tr><td colspan="3" class="loading">Veritabanı yükleniyor...</td></tr>
                 </tbody>
             </table>
             <div id="paginationContainer" class="pagination"></div>
@@ -410,9 +262,9 @@
 </div>
 
 <script>
-    const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTvI9TzWNvNo1xMHE1t8lmeY8Ma6gsVxA0pftYke_tw7nOykjkQLypp1AjOl2iaN000i2dpvquzgRhX/pub?gid=0&single=true&output=csv";
+    const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTIxPvzZurF9wYw5suGmNPwLm5_f4_qXHnsiTsuUIDw4J-QZDSWlTsGAPRH-JJUwE7B8J2LfmV3JZyK/pub?output=csv";
     
-    const alphabetList = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+    const alphabetList = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","#"];
     
     let allData = [];
     let currentDisplayData = [];
@@ -420,16 +272,19 @@
     let currentPage = 1;
     const itemsPerPage = 50; 
 
+    // Favoriler ve önbellek hafızası aktif tutulmaktadır
     let favorites = JSON.parse(localStorage.getItem('cepheid_eng_favorites')) || [];
 
-    const CACHE_KEY = 'cepheid_eng_sfx_data';
-    const CACHE_TIME = 'cepheid_eng_sfx_time';
-    const CACHE_DURATION = 60 * 60 * 1000; 
+    const CACHE_KEY = 'cepheid_eng_sfx_data_v4';
+    const CACHE_TIME = 'cepheid_eng_sfx_time_v4';
+    const CACHE_DURATION = 60 * 60 * 1000; // 1 Saatlik veri önbelleği
     let currentSearchTerm = ''; 
 
     function getCleanFirstChar(str) {
         if(!str) return "";
-        return str.trim().charAt(0).toUpperCase();
+        let char = str.trim().charAt(0).toUpperCase();
+        if (!char.match(/[A-Z]/)) return "#";
+        return char;
     }
 
     function copyText(element) {
@@ -469,16 +324,21 @@
                 header: false,
                 complete: function(results) {
                     let rows = results.data;
-                    rows.shift(); 
+                    rows.shift(); // Başlık satırını atla
 
+                    // Excel dosyanızdaki sütun düzeni:
+                    // row[0] -> İngilizce (A Sütunu)
+                    // row[1] -> Türkçe (B Sütunu)
+                    // row[2] -> Açıklama (C Sütunu)
+                    // row[3] -> Örnekler (D Sütunu)
+                    // row[4] -> Güncelleme Tarihi (E Sütunu)
                     allData = rows.map((row, index) => ({
                         id: index,
                         english: row[0] ? row[0].trim() : '',
-                        pronunciation: row[1] ? row[1].trim() : '',
-                        turkish: row[2] ? row[2].trim() : '',
-                        explanation: row[3] ? row[3].trim() : '',
-                        example: row[4] ? row[4].trim() : '',
-                        updateDate: row[5] ? row[5].trim() : ''
+                        turkish: row[1] ? row[1].trim() : '',
+                        explanation: row[2] ? row[2].trim() : '',
+                        example: row[3] ? row[3].trim() : '',
+                        updateDate: row[4] ? row[4].trim() : ''
                     })).filter(item => item.english !== '' || item.turkish !== '');
 
                     allData.sort((a, b) => a.english.localeCompare(b.english, 'en'));
@@ -538,6 +398,7 @@
 
     function initSidebar() {
         const container = document.getElementById('letterContainer');
+        container.innerHTML = '';
         alphabetList.forEach(letter => {
             let btn = document.createElement('button');
             btn.className = 'letter-btn';
@@ -601,11 +462,11 @@
 
         if (currentDisplayData.length === 0) {
             if (currentCategory === 'Favoriler') {
-                tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding:50px; color:#aaa; font-size: 1.1em;">Henüz favorilere eklediğiniz bir kelime yok.<br><span style="font-size: 0.85em; color: #777;">Kelimelerin yanındaki yıldıza tıklayarak listenizi oluşturabilirsiniz.</span></td></tr>';
+                tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; padding:50px; color:#aaa; font-size: 1.1em;">Henüz favorilere eklediğiniz bir kelime yok.<br><span style="font-size: 0.85em; color: #777;">Kelimelerin yanındaki yıldıza tıklayarak listenizi oluşturabilirsiniz.</span></td></tr>';
             } else {
                 let currentSearch = document.getElementById('searchInput').value;
                 tbody.innerHTML = `
-                    <tr><td colspan="4" style="text-align:center; padding:60px 20px;">
+                    <tr><td colspan="3" style="text-align:center; padding:60px 20px;">
                         <div style="font-size: 1.3em; color: #ccc; margin-bottom: 25px;">
                             Aradığınız <strong style="color: var(--accent-color);">"${currentSearch}"</strong> kelimesi sözlükte bulunamadı.
                         </div>
@@ -641,7 +502,6 @@
             let moreButton = item.example !== '' ? `<br><span class="more-link" onclick="openModal(${item.id})">Daha Fazla Örnek »</span>` : '';
 
             let hEnglish = highlightText(formattedEnglish, currentSearchTerm);
-            let hPronunciation = highlightText(item.pronunciation, currentSearchTerm);
             let hTurkish = highlightText(formattedTurkish, currentSearchTerm);
             let hExp = highlightText(formattedExp, currentSearchTerm);
 
@@ -662,7 +522,6 @@
                             ${copyEn}
                         </div>
                     </td>
-                    <td style="font-size: 1.05em;">${hPronunciation}</td>
                     <td>
                         <div class="copy-wrapper">
                             <span>${hTurkish}</span> 
@@ -760,7 +619,6 @@
 
             let filtered = searchPool.filter(item => 
                 item.english.toLowerCase().includes(term) ||
-                item.pronunciation.toLowerCase().includes(term) ||
                 item.turkish.toLowerCase().includes(term) ||
                 item.explanation.toLowerCase().includes(term)
             );
@@ -772,7 +630,7 @@
 
     function openModal(id) {
         const item = allData.find(x => x.id === id);
-        document.getElementById('modalTitle').innerText = `${item.english} (${item.pronunciation})`;
+        document.getElementById('modalTitle').innerText = `${item.english}`;
         
         let formattedExample = item.example;
         formattedExample = formattedExample.replace(/(\(\d+\))/g, '<br><br><span style="color:var(--accent-color); font-weight:bold; text-align:left; display:block;">$1</span>').replace(/^<br><br>/, '');
